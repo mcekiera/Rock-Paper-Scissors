@@ -1,7 +1,7 @@
 @import 'animations';
 
 * {
-	border: 1px solid #000;
+	// border: 1px solid #000;
 }
 
 body {
@@ -13,6 +13,10 @@ body {
 	font-size: 60px;
 	text-align: center;
 	color: #000;
+}
+
+.game__score {
+	margin-bottom: 50px;
 }
 
 .game__buttons {
@@ -111,20 +115,16 @@ body {
 .game__comment {
 	color: #fff;
 	line-height: 50px;
+	margin: 0;
+	padding: 0;
 }
 
 .exit {
 	position: absolute;
 	cursor: pointer;
+	left: 70%;
 }
 
-footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	text-align: center;
-
-}
 
 .weekness {
 	border-color: #ff0000 !important;
