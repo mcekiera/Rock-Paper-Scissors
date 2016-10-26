@@ -1,0 +1,74 @@
+@import 'animations';
+
+* {
+	// border: 1px solid #000;
+}
+body {
+	background-color: #fff;
+	font-family: 'Bangers', cursive;
+}
+
+.game__header {
+	font-size: 60px;
+	text-align: center;
+	color: #000;
+}
+
+.game__buttons {
+	text-align: center;
+
+	&--ext {
+		padding: 20px 0;
+	}
+}
+
+.button {
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	border: 4px solid #000;
+	background-color: transparent;
+	font-size: 26px;
+	color: #000;
+
+	&--start {
+		color: #66CD00;
+		border-color: #66CD00;
+	}
+
+	&--ext {
+		color: #458B00;
+		border-color: #458B00;
+	}
+
+	&--stone {
+		color: #333;
+		border-color: #333;
+	}
+
+	&--lizard {
+		color: #66CD00;
+		border-color: #66CD00;
+	}
+
+	&--spock {
+		color: #9A32CD;
+		border-color: #9A32CD;
+	}
+
+	&--paper {
+		color: #ccc;
+		border-color: #ccc;
+	}
+
+	&--scissors {
+		color: #79CDCD;
+		border-color: #79CDCD;
+	}
+
+
+	.fa {
+		font-size: 50px;
+	}
+}
+

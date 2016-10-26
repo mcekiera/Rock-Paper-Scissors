@@ -1,0 +1,63 @@
+@keyframes flameOn {
+  30% {
+    text-shadow: 2px -8px 5px red; }
+  50 {
+    text-shadow: 1px 4px 22px orange; }
+  60% {
+    text-shadow: 2px 0px 8px yellow; }
+  70% {
+    text-shadow: 2px -8px 5px red; }
+  80% {
+    text-shadow: 2px 0px 8px yellow; }
+  90% {
+    text-shadow: 2px 8px 22px orange; }
+  100% {
+    text-shadow: 0 0 22px white; } }
+
+body {
+  background-color: #fff;
+  font-family: 'Bangers', cursive; }
+
+.game__header {
+  font-size: 60px;
+  text-align: center;
+  color: #000; }
+
+.game__buttons {
+  text-align: center; }
+  .game__buttons--ext {
+    padding: 20px 0; }
+
+.button {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  border: 4px solid #000;
+  background-color: transparent;
+  font-size: 26px;
+  color: #000; }
+  .button--start {
+    color: #66CD00;
+    border-color: #66CD00; }
+  .button--ext {
+    color: #458B00;
+    border-color: #458B00; }
+  .button--stone {
+    color: #333;
+    border-color: #333; }
+  .button--lizard {
+    color: #66CD00;
+    border-color: #66CD00; }
+  .button--spock {
+    color: #9A32CD;
+    border-color: #9A32CD; }
+  .button--paper {
+    color: #ccc;
+    border-color: #ccc; }
+  .button--scissors {
+    color: #79CDCD;
+    border-color: #79CDCD; }
+  .button .fa {
+    font-size: 50px; }
+
+/*# sourceMappingURL=style.css.map */
