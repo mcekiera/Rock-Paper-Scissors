@@ -41,9 +41,10 @@ var newGameElemBasic = document.getElementById('js-newGameElementBasic'),
 
 /* Figure objects */
 
-function Figure(name, strength) {
+function Figure(name, strength, weakness) {
 	this.name = name;
 	this.strength = strength;
+	this.weakness = weakness;
 
 	this.compare = function(figure) {
 		if(name == figure) {
@@ -60,14 +61,24 @@ function Figure(name, strength) {
 	};
 }
 
-var rock = new Figure('rock',['scissors','lizard']);
-var scissors = new Figure('scissors',['paper','lizard']);
-var paper = new Figure('paper',['rock','spock']);
-var lizard = new Figure('lizard',['spock','paper']);
-var spock = new Figure('spock',['scissors','rock']);
+var rock = new Figure('rock',['scissors','lizard'],['paper','spock']);
+var scissors = new Figure('scissors',['paper','lizard'],['rock','spock']);
+var paper = new Figure('paper',['rock','spock'],['scissors','lizard']);
+var lizard = new Figure('lizard',['spock','paper'],['rock','scissors']);
+var spock = new Figure('spock',['scissors','rock'],['paper','lizard']);
 
+var map = {
+	'rock' : pickRock,
+	'paper' : pickPaper,
+	'scissors' : pickScissors,
+	'spock' : pickSpock,
+	'lizard' : pickLizard
+};
 
 /* FUNCTIONS */
+
+
+
 function setVersion() {
 	switch(version) {
 		case 'basic':
@@ -141,7 +152,6 @@ function newGameBsc() {
 
 function checkRoundWinner(playerPick, computerPick) {
 	playerResultElem.innerHTML = computerResultElem.innerHTML = '';
-	var winnerIs = 'player';
 	var result = playerPick.compare(computerPick);
 
 	if (result === 0) {
@@ -158,14 +168,18 @@ function checkRoundWinner(playerPick, computerPick) {
 }
 
 function draw() {
-	commentator.style.color = "#FFFF00";
+	commentator.style.color = "#ffa500";
 	computerResultElem.innerHTML = "Draw!";
 	playerResultElem.innerHTML = "Draw!";
+	computerResultElem.style.color = "#ffa500";
+	playerResultElem.style.color = "#ffa500";
 }
 
 function playerWins() {
 	playerResultElem.innerHTML = "Victory!";
 	computerResultElem.innerHTML = "Defeat!";
+	computerResultElem.style.color = "#ff0000";
+	playerResultElem.style.color = "#00ff00";
 	player.score++;
 	commentator.style.color = "#00FF00";
 }
@@ -173,6 +187,8 @@ function playerWins() {
 function computerWins() {
 	computerResultElem.innerHTML = "Victory!";
 	playerResultElem.innerHTML = "Defeat!";
+	computerResultElem.style.color = "#00ff00";
+	playerResultElem.style.color = "#ff0000";
 	computer.score++;
 	commentator.style.color = "#FF0000";
 }
@@ -214,8 +230,9 @@ function isOver() {
 'rock' vs 'paper', it will display string from description array, which contain both,
 'rock' and 'paper' words.*/
 function getDescription(first, second) {
+  var result = '';
 	if (first == second) {
-		var result = 'draw';
+		result = 'draw';
 	} else {
 		var regex = new RegExp('(?=.*' + first + '.*)(?=.*' + second  + '.*)','i');
 		for (var i = 0, len = descriptions.length; i < len; i++) {
@@ -228,12 +245,76 @@ function getDescription(first, second) {
 	commentator.innerText = result;
 }
 
+function markRelated(figure) {
+	console.log(figure);
+	for(var i = 0; i < figure.weakness.length; i++) {
+			
+		map[figure.weakness[i]].className += " weekness";
+		map[figure.strength[i]].className += " strength";
+
+	}
+	
+}
+
+function unmarkRelated(figure) {
+	for(var i = 0; i < figure.weakness.length; i++) {
+		map[figure.weakness[i]].className = map[figure.weakness[i]].className.replace(/\sweekness/g,'');
+		map[figure.strength[i]].className = map[figure.strength[i]].className.replace(/\sstrength/g,'');
+	}
+}
+
+// function setRelations() {
+// 	for(key in map) {
+// 		console.log(map[key]);
+// 		console.log(window[key]);
+// 		map[key].addEventListener('click', function() { playerPick(window[key]);});
+// 		map[key].addEventListener('mouseover', function() { markRelated(window[key]);});
+// 		map[key].addEventListener('mouseout', function() { unmarkRelated(window[key]);});
+// 	}
+// }
+
+
+
 pickRock.addEventListener('click', function() { playerPick(rock); 
 });
-pickPaper.addEventListener('click', function() { playerPick(paper); });
-pickScissors.addEventListener('click', function() { playerPick(scissors); });
-pickSpock.addEventListener('click', function() { playerPick(spock); });
-pickLizard.addEventListener('click', function() { playerPick(lizard); });
+pickRock.addEventListener('mouseover', function() { markRelated(rock); 
+});
+pickRock.addEventListener('mouseout', function() { unmarkRelated(rock); 
+});
+
+pickPaper.addEventListener('click', function() { playerPick(paper); 
+});
+pickPaper.addEventListener('mouseover', function() { markRelated(paper); 
+});
+pickPaper.addEventListener('mouseout', function() { unmarkRelated(paper); 
+});
+
+pickScissors.addEventListener('click', function() { playerPick(scissors); 
+});
+pickScissors.addEventListener('mouseover', function() { markRelated(scissors); 
+});
+pickScissors.addEventListener('mouseout', function() { unmarkRelated(scissors); 
+});
+
+pickSpock.addEventListener('click', function() { playerPick(spock); 
+});
+pickSpock.addEventListener('mouseover', function() { markRelated(spock); 
+});
+pickSpock.addEventListener('mouseout', function() { unmarkRelated(spock); 
+});
+
+pickLizard.addEventListener('click', function() { playerPick(lizard); 
+});
+pickLizard.addEventListener('mouseover', function() { markRelated(lizard); 
+});
+pickLizard.addEventListener('mouseout', function() { unmarkRelated(lizard); 
+});
+
+
+// pickPaper.addEventListener('click', function() { playerPick(paper); });
+// pickScissors.addEventListener('click', function() { playerPick(scissors); });
+// pickSpock.addEventListener('click', function() { playerPick(spock); });
+// pickLizard.addEventListener('click', function() { playerPick(lizard); });
 
 newGameBtnBasic.addEventListener('click', newGameBsc);
 newGameBtnExtended.addEventListener('click', newGameExt);
