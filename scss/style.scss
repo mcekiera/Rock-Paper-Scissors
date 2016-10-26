@@ -34,11 +34,15 @@ body {
 	&--start {
 		color: #66CD00;
 		border-color: #66CD00;
+		margin: 40px;
+		padding: 0;
 	}
 
 	&--ext {
 		color: #458B00;
 		border-color: #458B00;
+		margin: 40px;
+		padding: 0;
 	}
 
 	&--stone {
@@ -70,5 +74,23 @@ body {
 	.fa {
 		font-size: 50px;
 	}
+}
+
+.game__comment {
+	color: #fff;
+	line-height: 50px;
+}
+
+.exit {
+	position: absolute;
+	cursor: pointer;
+}
+
+@media (min-width: 400px) {
+	.button--paper;
+	.button--scissors {
+		margin: 0 40px;
+	}
+
 }
 

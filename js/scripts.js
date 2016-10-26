@@ -14,6 +14,7 @@ var newGameElemBasic = document.getElementById('js-newGameElementBasic'),
 		pickScissors = document.getElementById('js-playerPick_scissors'),
 		pickSpock = document.getElementById('js-playerPick_spock'),
 		pickLizard = document.getElementById('js-playerPick_lizard'),
+		exitBtn = document.getElementById('js-exitBtn'),
 
 /* Display elements */
 
@@ -24,6 +25,7 @@ var newGameElemBasic = document.getElementById('js-newGameElementBasic'),
 		computerPickElem = document.getElementById('js-computerPick'),
 		playerResultElem = document.getElementById('js-playerResult'),
 		computerResultElem = document.getElementById('js-computerResult'),
+		commentator = document.getElementById('js-commentator'),
 
 /* Basic values */
 
@@ -31,11 +33,11 @@ var newGameElemBasic = document.getElementById('js-newGameElementBasic'),
 		player = { name: '', score: 0 },
 		computer = { score: 0 },
 		version = 'basic',
-		possibleChoice = [];
+		possibleChoice = [],
 
 		descriptions =['Scissors cuts Paper', 'Paper covers Rock', 'Rock crushes Lizard', 
 		'Lizard poisons Spock', 'Spock smashes Scissors', 'Scissors decapitates Lizard',
-		'Lizard eats Paper', 'Paper disproves Spock', 'Spock vaporizes Rock', 'Rock crushes Scissors']
+		'Lizard eats Paper', 'Paper disproves Spock', 'Spock vaporizes Rock', 'Rock crushes Scissors'];
 
 /* Figure objects */
 
@@ -91,10 +93,10 @@ function setGameElements() {
 		case 'ended': 
 			if (version == 'basic') {
 				newGameBtnBasic.innerText = 'Again!';
-				newGameBtnBasic.innerText = 'Again!';
+				newGameBtnExtended.innerText = 'Extended';
 			} else {
 				newGameBtnExtended.innerText = 'Again!';
-				newGameBtnBasic.innerText = 'Change version!';
+				newGameBtnBasic.innerText = 'Basic';
 			}
 
 		case 'notStarted': 
@@ -104,6 +106,11 @@ function setGameElements() {
 			pickElem.style.display = 'none';
 			resultsElem.style.display = 'none';
 	}
+}
+
+function reset() {
+	gameState = 'notStarted';
+	setGameElements();
 }
 
 function newGame() { 
@@ -116,6 +123,7 @@ function newGame() {
 		setVersion();
 		playerNameElem.innerHTML = player.name;
 		setGamePoints(); 
+		commentator.style.color = "#fff";
 	} 
 }
 
@@ -148,19 +156,23 @@ function checkRoundWinner(playerPick, computerPick) {
 }
 
 function draw() {
-
+	commentator.style.color = "#FFFF00";
+	computerResultElem.innerHTML = "Draw!";
+	playerResultElem.innerHTML = "Draw!";
 }
 
 function playerWins() {
 	playerResultElem.innerHTML = "Victory!";
 	computerResultElem.innerHTML = "Defeat!";
 	player.score++;
+	commentator.style.color = "#00FF00";
 }
 
 function computerWins() {
 	computerResultElem.innerHTML = "Victory!";
 	playerResultElem.innerHTML = "Defeat!";
 	computer.score++;
+	commentator.style.color = "#FF0000";
 }
 
 function setGamePoints() {
@@ -185,20 +197,33 @@ function playerPick(playerPick) {
 
 function isOver() {
 	if (player.score === 10 || computer.score === 10) {
+		if( player.score === 10) {
+			commentator.innerText = 'You win!';
+		} else {
+			commentator.innerText = 'You lose!';
+		}
 		gameState = 'ended';
 		setVersion();
 		setGameElements();
 	}
 }
 
+/* It finds descrition for result of given round, for example, in case of: 
+'rock' vs 'paper', it will display string from description array, which contain both,
+'rock' and 'paper' words.*/
 function getDescription(first, second) {
-	console.log('(?=.*' + first + '.*)(?=.*' + second  + '.*)')
-	var regex = new RegExp('(?=.*' + first + '.*)(?=.*' + second  + '.*)','i');
-	for (var i = 0, len = descriptions.length; i < len; i++) {
-		if(regex.test(descriptions[i])) {
-			console.log(descriptions[i]);
+	if (first == second) {
+		var result = 'draw';
+	} else {
+		var regex = new RegExp('(?=.*' + first + '.*)(?=.*' + second  + '.*)','i');
+		for (var i = 0, len = descriptions.length; i < len; i++) {
+			if(regex.test(descriptions[i])) {
+				result = descriptions[i];
+				break;
+			}
 		}
 	}
+	commentator.innerText = result;
 }
 
 pickRock.addEventListener('click', function() { playerPick(rock); 
@@ -210,5 +235,5 @@ pickLizard.addEventListener('click', function() { playerPick(lizard); });
 
 newGameBtnBasic.addEventListener('click', newGameBsc);
 newGameBtnExtended.addEventListener('click', newGameExt);
-
+exitBtn.addEventListener('click', reset);
 setGameElements();

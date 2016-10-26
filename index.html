@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Rock-Paper-Scissors</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
- 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" /> 
- 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
- 	<link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet"> 
-	<link href="css/style.css" rel="stylesheet">
-</head>
-<body>
-	<section class="container-flex game">
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Rock-Paper-Scissors</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" /> 
+	 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+	 	<link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet"> 
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+
+		<!-- HEADER -->
+
 		<div class="container">
 			<h1 class=" game__header">
-				<span class="game__header--left">Paper</span>
-				<span class="game__header--center">-Scissors</span>
-				<span class="game__header--right">-Rock</span>
+				<span class="game__header--left">Rock</span>
+				<span class="game__header--center">-Paper</span>
+				<span class="game__header--right">-Scissors</span>
 			</h1>
 		</div>
+
+		<!-- BUTTONS -->
+
 		<div class="container game__buttons">
 			<div id="js-newGameElementBasic">
 				<button id="js-newGameButtonBasic" class="button button--start">Basic</button>
@@ -28,6 +33,7 @@
 			<div id="js-playerPickElement" class="container"> 
 				<div class="row text-center"> 
 					<div class="col-xs-12 text-center">
+						<i class="fa fa-times exit" id="js-exitBtn"></i>
 						<button id="js-playerPick_rock" class="button button--rock"> 
 							<i class="fa fa-hand-rock-o" aria-hidden="true"></i>
 							<p>Rock</p>
@@ -64,7 +70,13 @@
 				</div> 
 			</div>
 		</div>
+
+		<!-- SCORE TABLE -->
+
 		<div class="game__score">
+			<div>
+			<h1 id="js-commentator" class="text-center game__comment">Wait for result...</h1>
+			</div>
 			<div id="js-resultsTableElement" class="container"> 
 				<div class="row"> 
 					<div class="col-xs-5 text-center"> 
@@ -106,7 +118,10 @@
 				</div> 
 			</div>
 		</div>
-	</section>
-	<script src="js/scripts.js" type="text/javascript"></script>
-</body>
+
+		<!-- SCRIPTS -->
+
+		<script src="js/scripts.js" type="text/javascript"></script>
+
+	</body>
 </html>
