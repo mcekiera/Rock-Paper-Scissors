@@ -21,6 +21,30 @@ var newGameElem = document.getElementById('js-newGameElement'),
 		computer = { score: 0 };
 
 
+/* Figure objects */
+function Figure(name, strength, resistance) {
+	this.name = name;
+	this.strength = strength;
+	this.resistance = resistance;
+
+	this.compare = function(figure) {
+		if(name == figure) {
+			return 0;
+		} else if (this.strength.indexOf(figure)>=0) {
+			return 1;
+		} else {
+			return -1;
+		}
+	}
+}
+
+var stone = new Figure('stone',['scissors'],['paper']);
+var scissors = new Figure('scissors',['paper'],['stone']);
+var paper = new Figure('paper',['stone'],['scissors']);
+
+
+/**********************/
+
 function setGameElements() { 
 	switch(gameState) { 
 		case 'started':
@@ -39,7 +63,7 @@ function setGameElements() {
 }
 
 function newGame() { 
-	player.name = prompt('Graczu, wpisz swoje imię', 'imię gracza');
+	player.name = prompt('What is your name, Traveller?', 'Name');
 	if (player.name) {
 		player.score = computer.score = 0;
 		gameState = 'started';
@@ -52,21 +76,19 @@ function newGame() {
 function checkRoundWinner(playerPick, computerPick) {
 	playerResultElem.innerHTML = computerResultElem.innerHTML = '';
 	var winnerIs = 'player';
+	var result = playerPick.compare(computerPick);
 
-	if (playerPick == computerPick) {
+	if (result === 0) {
 		winnerIs = 'none';
-	} else if (
-		(computerPick == 'rock' && playerPick == 'scissors') || 
-		(computerPick == 'scissors' && playerPick == 'paper')|| 
-		(computerPick == 'paper' && playerPick == 'rock') ) { 
+	} else if ( result === -1) { 
 			winnerIs = 'computer'; 
 	}
 
 	if (winnerIs == 'player') {
-		playerResultElem.innerHTML = "Wygrana!";
+		playerResultElem.innerHTML = "Victory!";
 		player.score++;
 	} else if (winnerIs == 'computer') {
-		computerResultElem.innerHTML = "Wygrana!";
+		computerResultElem.innerHTML = "Victory!";
 		computer.score++;
 	}
 
@@ -80,7 +102,7 @@ function setGamePoints() {
 }
 
 function getComputerPick() {
-	var possibleVal = ['rock','paper','scissors'];
+	var possibleVal = ['stone','paper','scissors'];
 	return(possibleVal[Math.floor(Math.random()*3)]);
 }
 
@@ -98,15 +120,13 @@ function isOver() {
 	if (player.score === 10 || computer.score === 10) {
 		gameState = 'ended';
 		setGameElements();
-	} else {
-		console.log(player.score + ',' + computer.score);
 	}
 }
 
-pickRock.addEventListener('click', function() { playerPick('rock'); ;
+pickRock.addEventListener('click', function() { playerPick(stone); ;
 });
-pickPaper.addEventListener('click', function() { playerPick('paper'); });
-pickScissors.addEventListener('click', function() { playerPick('scissors'); });
+pickPaper.addEventListener('click', function() { playerPick(paper); });
+pickScissors.addEventListener('click', function() { playerPick(scissors); });
 newGameBtn.addEventListener('click', newGame);
 
 setGameElements();
