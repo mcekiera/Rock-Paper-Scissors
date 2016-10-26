@@ -1,8 +1,9 @@
 @import 'animations';
 
 * {
-	// border: 1px solid #000;
+	border: 1px solid #000;
 }
+
 body {
 	background-color: #fff;
 	font-family: 'Bangers', cursive;
@@ -36,6 +37,10 @@ body {
 		border-color: #66CD00;
 		margin: 40px;
 		padding: 0;
+
+		&:hover {
+			background-color: #66CD00;
+		}
 	}
 
 	&--ext {
@@ -43,33 +48,60 @@ body {
 		border-color: #458B00;
 		margin: 40px;
 		padding: 0;
+
+		&:hover {
+			background-color: #458B00;
+		}
 	}
 
-	&--stone {
+	&--rock {
 		color: #333;
 		border-color: #333;
+
+		&:hover {
+			background-color: #333;
+		}
 	}
 
 	&--lizard {
 		color: #66CD00;
 		border-color: #66CD00;
+
+		&:hover {
+			background-color: #66CD00;
+		}
 	}
 
 	&--spock {
 		color: #9A32CD;
 		border-color: #9A32CD;
+
+		&:hover {
+			background-color: #9A32CD;
+		}
 	}
 
 	&--paper {
 		color: #ccc;
 		border-color: #ccc;
+
+		&:hover {
+			background-color: #ccc;
+		}
 	}
 
 	&--scissors {
 		color: #79CDCD;
 		border-color: #79CDCD;
+
+		&:hover {
+			background-color: #79CDCD;
+		}
 	}
 
+	&:hover {
+		color: #fff;
+	}
 
 	.fa {
 		font-size: 50px;
@@ -87,7 +119,7 @@ body {
 }
 
 @media (min-width: 400px) {
-	.button--paper;
+	.button--paper,
 	.button--scissors {
 		margin: 0 40px;
 	}

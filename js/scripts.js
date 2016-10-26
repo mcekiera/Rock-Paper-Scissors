@@ -92,10 +92,10 @@ function setGameElements() {
 
 		case 'ended': 
 			if (version == 'basic') {
-				newGameBtnBasic.innerText = 'Again!';
+				newGameBtnBasic.innerText = 'Try again!';
 				newGameBtnExtended.innerText = 'Extended';
 			} else {
-				newGameBtnExtended.innerText = 'Again!';
+				newGameBtnExtended.innerText = 'Try again!';
 				newGameBtnBasic.innerText = 'Basic';
 			}
 
@@ -110,11 +110,13 @@ function setGameElements() {
 
 function reset() {
 	gameState = 'notStarted';
+	newGameBtnExtended.innerText = 'Extended';
+	newGameBtnBasic.innerText = 'Basic';
 	setGameElements();
 }
 
 function newGame() { 
-	player.name = prompt('What is your name, Traveller?', 'Name');
+	player.name = prompt('What is your name?', 'Name');
 
 	if (player.name) {
 		player.score = computer.score = 0;

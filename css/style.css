@@ -1,3 +1,6 @@
+* {
+  border: 1px solid #000; }
+
 body {
   background-color: #fff;
   font-family: 'Bangers', cursive; }
@@ -25,26 +28,42 @@ body {
     border-color: #66CD00;
     margin: 40px;
     padding: 0; }
+    .button--start:hover {
+      background-color: #66CD00; }
   .button--ext {
     color: #458B00;
     border-color: #458B00;
     margin: 40px;
     padding: 0; }
-  .button--stone {
+    .button--ext:hover {
+      background-color: #458B00; }
+  .button--rock {
     color: #333;
     border-color: #333; }
+    .button--rock:hover {
+      background-color: #333; }
   .button--lizard {
     color: #66CD00;
     border-color: #66CD00; }
+    .button--lizard:hover {
+      background-color: #66CD00; }
   .button--spock {
     color: #9A32CD;
     border-color: #9A32CD; }
+    .button--spock:hover {
+      background-color: #9A32CD; }
   .button--paper {
     color: #ccc;
     border-color: #ccc; }
+    .button--paper:hover {
+      background-color: #ccc; }
   .button--scissors {
     color: #79CDCD;
     border-color: #79CDCD; }
+    .button--scissors:hover {
+      background-color: #79CDCD; }
+  .button:hover {
+    color: #fff; }
   .button .fa {
     font-size: 50px; }
 
@@ -55,5 +74,10 @@ body {
 .exit {
   position: absolute;
   cursor: pointer; }
+
+@media (min-width: 400px) {
+  .button--paper,
+  .button--scissors {
+    margin: 0 40px; } }
 
 /*# sourceMappingURL=style.css.map */

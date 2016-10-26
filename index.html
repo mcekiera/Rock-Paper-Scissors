@@ -75,49 +75,38 @@
 
 		<div class="game__score">
 			<div>
-			<h1 id="js-commentator" class="text-center game__comment">Wait for result...</h1>
+				<h1 id="js-commentator" class="text-center game__comment">Wait for result...</h1>
 			</div>
+
 			<div id="js-resultsTableElement" class="container"> 
 				<div class="row"> 
-					<div class="col-xs-5 text-center"> 
-						<span id="js-playerPoints" class="badge"> 0 
-						</span> 
-						<span id="js-playerName"> Pretender: 
-						</span> 
-						</div> 
-						<div class="col-xs-2 text-center"> VS. 
-						</div> 
-						<div class="col-xs-5 text-center"> 
-							<span id="js-computerPoints" class="badge"> 0 
-							</span> Ruthless computer 
-						</div> 
-					</div> 
-					<div class="row">
-						<div class="col-xs-5 text-center"> 
-							<span id="js-playerPick"> Pretender choice:
+					<div class="col-sm-3 col-xs-5 col-sm-offset-3 text-center">
+						<div>
+							<span id="js-playerPoints" class="badge"> 0 
 							</span> 
-						</div> 
-						<div class="col-xs-2">
-						</div> 
-						<div class="col-xs-5 text-center"> 
-							<span id="js-computerPick"> Computer choice: 
+							<span id="js-playerName"> Pretender: 
 							</span> 
+						</div>
+						<div id="js-playerPick"> Pretender choice:
 						</div> 
-					</div> 
-					<div class="row"> 
-						<div class="col-xs-5 text-center"> 
-							<span id="js-playerResult"> Pretender score:
-							</span> 
+						<div id="js-playerResult"> Pretender score:
 						</div> 
-						<div class="col-xs-2">
+					</div>
+					<div class="col-xs-1">
+						<div class="row">
+						<h3>VS</h3>
+						</div>
+					</div>
+					<div class="col-sm-2 col-xs-5 text-center">
+						<div id="js-computerPoints" class="badge"> 0 
+						</div> CMP
+						<div id="js-computerPick"> CMP choice: 
 						</div> 
-						<div class="col-xs-5 text-center"> 
-							<span id="js-computerResult"> Beast score:
-						</span>
-					</div> 
-				</div> 
+						<div id="js-computerResult"> CMP score:
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
 
 		<!-- SCRIPTS -->
 
