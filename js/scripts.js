@@ -33,6 +33,10 @@ var newGameElemBasic = document.getElementById('js-newGameElementBasic'),
 		version = 'basic',
 		possibleChoice = [];
 
+		descriptions =['Scissors cuts Paper', 'Paper covers Rock', 'Rock crushes Lizard', 
+		'Lizard poisons Spock', 'Spock smashes Scissors', 'Scissors decapitates Lizard',
+		'Lizard eats Paper', 'Paper disproves Spock', 'Spock vaporizes Rock', 'Rock crushes Scissors']
+
 /* Figure objects */
 
 function Figure(name, strength) {
@@ -54,23 +58,23 @@ function Figure(name, strength) {
 	};
 }
 
-var stone = new Figure('stone',['scissors','lizard']);
+var rock = new Figure('rock',['scissors','lizard']);
 var scissors = new Figure('scissors',['paper','lizard']);
-var paper = new Figure('paper',['stone','spock']);
+var paper = new Figure('paper',['rock','spock']);
 var lizard = new Figure('lizard',['spock','paper']);
 var spock = new Figure('spock',['scissors','rock']);
 
 
-/**********************/
+/* FUNCTIONS */
 function setVersion() {
 	switch(version) {
 		case 'basic':
 			extendedGameElement.style.display = 'none';
-			possibleChoice = ['stone','paper','scissors'];
+			possibleChoice = ['rock','paper','scissors'];
 			break;
 		case 'extended':
 			extendedGameElement.style.display = 'inline-block';
-			possibleChoice = ['stone','paper','scissors','lizard','spock'];
+			possibleChoice = ['rock','paper','scissors','lizard','spock'];
 			break;
 	}
 }
@@ -138,6 +142,7 @@ function checkRoundWinner(playerPick, computerPick) {
 		playerWins();
 	}
 
+	getDescription(playerPick.toString(),computerPick);
 	setGamePoints(); 
 	isOver();
 }
@@ -186,12 +191,23 @@ function isOver() {
 	}
 }
 
-pickRock.addEventListener('click', function() { playerPick(stone); 
+function getDescription(first, second) {
+	console.log('(?=.*' + first + '.*)(?=.*' + second  + '.*)')
+	var regex = new RegExp('(?=.*' + first + '.*)(?=.*' + second  + '.*)','i');
+	for (var i = 0, len = descriptions.length; i < len; i++) {
+		if(regex.test(descriptions[i])) {
+			console.log(descriptions[i]);
+		}
+	}
+}
+
+pickRock.addEventListener('click', function() { playerPick(rock); 
 });
 pickPaper.addEventListener('click', function() { playerPick(paper); });
 pickScissors.addEventListener('click', function() { playerPick(scissors); });
 pickSpock.addEventListener('click', function() { playerPick(spock); });
 pickLizard.addEventListener('click', function() { playerPick(lizard); });
+
 newGameBtnBasic.addEventListener('click', newGameBsc);
 newGameBtnExtended.addEventListener('click', newGameExt);
 
