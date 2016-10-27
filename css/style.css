@@ -62,6 +62,12 @@ body {
     border-color: #79CDCD; }
     .button--scissors:hover {
       background-color: #79CDCD; }
+  .button--rules {
+    display: block;
+    margin: 10px auto; }
+    .button--rules:hover {
+      background-color: #000;
+      padding: 0 7px; }
   .button:hover {
     color: #fff; }
   .button .fa {

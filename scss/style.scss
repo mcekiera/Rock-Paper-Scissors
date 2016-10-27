@@ -103,6 +103,16 @@ body {
 		}
 	}
 
+	&--rules {
+		display: block;
+		margin: 10px auto;
+
+		&:hover {
+			background-color: #000;
+			padding: 0 7px;
+		}
+	}
+
 	&:hover {
 		color: #fff;
 	}

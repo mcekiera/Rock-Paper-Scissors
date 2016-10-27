@@ -15,6 +15,7 @@ var newGameElemBasic = document.getElementById('js-newGameElementBasic'),
 		pickSpock = document.getElementById('js-playerPick_spock'),
 		pickLizard = document.getElementById('js-playerPick_lizard'),
 		exitBtn = document.getElementById('js-exitBtn'),
+		rulesBtn =  document.getElementById('js-rulesButton'),
 
 /* Display elements */
 
@@ -100,7 +101,11 @@ function setGameElements() {
 			pickElem.style.display = 'block';
 			resultsElem.style.display = 'block';
 			break;
-
+		case 'rules':
+			newGameElemBasic.style.display = 'none';
+			pickElem.style.display = 'block';
+			resultsElem.style.display = 'none';
+			break;
 		case 'ended': 
 			if (version == 'basic') {
 				newGameBtnBasic.innerText = 'Try again!';
@@ -250,21 +255,30 @@ function getDescription(first, second) {
 }
 
 function markRelated(figure) {
-	console.log(figure);
-	for(var i = 0; i < figure.weakness.length; i++) {
-			
-		map[figure.weakness[i]].className += ' weekness';
-		map[figure.strength[i]].className += ' strength';
+	if (gameState == 'rules') {
+		for(var i = 0; i < figure.weakness.length; i++) {
+				
+			map[figure.weakness[i]].className += ' weekness';
+			map[figure.strength[i]].className += ' strength';
 
+		}
 	}
 	
 }
 
 function unmarkRelated(figure) {
-	for(var i = 0; i < figure.weakness.length; i++) {
-		map[figure.weakness[i]].className = map[figure.weakness[i]].className.replace(/\sweekness/g,'');
-		map[figure.strength[i]].className = map[figure.strength[i]].className.replace(/\sstrength/g,'');
+	if (gameState == 'rules') {
+		for(var i = 0; i < figure.weakness.length; i++) {
+			map[figure.weakness[i]].className = map[figure.weakness[i]].className.replace(/\sweekness/g,'');
+			map[figure.strength[i]].className = map[figure.strength[i]].className.replace(/\sstrength/g,'');
+		}
 	}
+}
+
+function displayRules() {
+	version = 'extended';
+	gameState = 'rules';
+	setGameElements();
 }
 
 // function setRelations() {
@@ -299,13 +313,8 @@ pickLizard.addEventListener('click', function() { playerPick(lizard); });
 pickLizard.addEventListener('mouseover', function() { markRelated(lizard); });
 pickLizard.addEventListener('mouseout', function() { unmarkRelated(lizard); });
 
-
-// pickPaper.addEventListener('click', function() { playerPick(paper); });
-// pickScissors.addEventListener('click', function() { playerPick(scissors); });
-// pickSpock.addEventListener('click', function() { playerPick(spock); });
-// pickLizard.addEventListener('click', function() { playerPick(lizard); });
-
 newGameBtnBasic.addEventListener('click', newGameBsc);
 newGameBtnExtended.addEventListener('click', newGameExt);
+rulesBtn.addEventListener('click', displayRules);
 exitBtn.addEventListener('click', reset);
 setGameElements();
