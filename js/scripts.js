@@ -123,6 +123,10 @@ function reset() {
 	gameState = 'notStarted';
 	newGameBtnExtended.innerText = 'Extended';
 	newGameBtnBasic.innerText = 'Basic';
+	computerResultElem.innerHTML = '';
+	playerResultElem.innerHTML = '';
+	commentator.innerText = 'Wait for result';
+	commentator.style.color = "#fff";
 	setGameElements();
 }
 
@@ -136,7 +140,7 @@ function newGame() {
 		setVersion();
 		playerNameElem.innerHTML = player.name;
 		setGamePoints(); 
-		commentator.style.color = "#fff";
+		commentator.style.color = '#fff';
 	} 
 }
 
@@ -168,29 +172,29 @@ function checkRoundWinner(playerPick, computerPick) {
 }
 
 function draw() {
-	commentator.style.color = "#ffa500";
-	computerResultElem.innerHTML = "Draw!";
-	playerResultElem.innerHTML = "Draw!";
-	computerResultElem.style.color = "#ffa500";
-	playerResultElem.style.color = "#ffa500";
+	commentator.style.color = '#ffa500';
+	computerResultElem.innerHTML = 'Draw!';
+	playerResultElem.innerHTML = 'Draw!';
+	computerResultElem.style.color = '#ffa500';
+	playerResultElem.style.color = '#ffa500';
 }
 
 function playerWins() {
-	playerResultElem.innerHTML = "Victory!";
-	computerResultElem.innerHTML = "Defeat!";
-	computerResultElem.style.color = "#ff0000";
-	playerResultElem.style.color = "#00ff00";
+	playerResultElem.innerHTML = 'Victory!';
+	computerResultElem.innerHTML = 'Defeat!';
+	computerResultElem.style.color = '#ff0000';
+	playerResultElem.style.color = '#00ff00';
 	player.score++;
-	commentator.style.color = "#00FF00";
+	commentator.style.color = '#00FF00';
 }
 
 function computerWins() {
-	computerResultElem.innerHTML = "Victory!";
-	playerResultElem.innerHTML = "Defeat!";
-	computerResultElem.style.color = "#00ff00";
-	playerResultElem.style.color = "#ff0000";
+	computerResultElem.innerHTML = 'Victory!';
+	playerResultElem.innerHTML = 'Defeat!';
+	computerResultElem.style.color = '#00ff00';
+	playerResultElem.style.color = '#ff0000';
 	computer.score++;
-	commentator.style.color = "#FF0000";
+	commentator.style.color = '#FF0000';
 }
 
 function setGamePoints() {
@@ -249,8 +253,8 @@ function markRelated(figure) {
 	console.log(figure);
 	for(var i = 0; i < figure.weakness.length; i++) {
 			
-		map[figure.weakness[i]].className += " weekness";
-		map[figure.strength[i]].className += " strength";
+		map[figure.weakness[i]].className += ' weekness';
+		map[figure.strength[i]].className += ' strength';
 
 	}
 	
@@ -275,40 +279,25 @@ function unmarkRelated(figure) {
 
 
 
-pickRock.addEventListener('click', function() { playerPick(rock); 
-});
-pickRock.addEventListener('mouseover', function() { markRelated(rock); 
-});
-pickRock.addEventListener('mouseout', function() { unmarkRelated(rock); 
-});
+pickRock.addEventListener('click', function() { playerPick(rock); });
+pickRock.addEventListener('mouseover', function() { markRelated(rock); });
+pickRock.addEventListener('mouseout', function() { unmarkRelated(rock); });
 
-pickPaper.addEventListener('click', function() { playerPick(paper); 
-});
-pickPaper.addEventListener('mouseover', function() { markRelated(paper); 
-});
-pickPaper.addEventListener('mouseout', function() { unmarkRelated(paper); 
-});
+pickPaper.addEventListener('click', function() { playerPick(paper); });
+pickPaper.addEventListener('mouseover', function() { markRelated(paper); });
+pickPaper.addEventListener('mouseout', function() { unmarkRelated(paper); });
 
-pickScissors.addEventListener('click', function() { playerPick(scissors); 
-});
-pickScissors.addEventListener('mouseover', function() { markRelated(scissors); 
-});
-pickScissors.addEventListener('mouseout', function() { unmarkRelated(scissors); 
-});
+pickScissors.addEventListener('click', function() { playerPick(scissors); });
+pickScissors.addEventListener('mouseover', function() { markRelated(scissors); });
+pickScissors.addEventListener('mouseout', function() { unmarkRelated(scissors); });
 
-pickSpock.addEventListener('click', function() { playerPick(spock); 
-});
-pickSpock.addEventListener('mouseover', function() { markRelated(spock); 
-});
-pickSpock.addEventListener('mouseout', function() { unmarkRelated(spock); 
-});
+pickSpock.addEventListener('click', function() { playerPick(spock); });
+pickSpock.addEventListener('mouseover', function() { markRelated(spock); });
+pickSpock.addEventListener('mouseout', function() { unmarkRelated(spock); });
 
-pickLizard.addEventListener('click', function() { playerPick(lizard); 
-});
-pickLizard.addEventListener('mouseover', function() { markRelated(lizard); 
-});
-pickLizard.addEventListener('mouseout', function() { unmarkRelated(lizard); 
-});
+pickLizard.addEventListener('click', function() { playerPick(lizard); });
+pickLizard.addEventListener('mouseover', function() { markRelated(lizard); });
+pickLizard.addEventListener('mouseout', function() { unmarkRelated(lizard); });
 
 
 // pickPaper.addEventListener('click', function() { playerPick(paper); });
