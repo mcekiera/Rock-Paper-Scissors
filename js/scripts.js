@@ -78,8 +78,11 @@ var map = {
 
 /* FUNCTIONS */
 
+/* SET UP FUNCTIONS - 
+structure, transitions and view of game in different modes and versions */
 
-
+/* Determine, which elements of UI will be displayed in given game version: 
+basic rock-paper-scissor, or extended moder rock-paper-scissor-lizard-spock. */
 function setVersion() {
 	switch(version) {
 		case 'basic':
@@ -93,6 +96,8 @@ function setVersion() {
 	}
 }
 
+/* Determines which elements of UI will be displayed in certain stages of game: notStarted,
+started, ended and rules */ 
 function setGameElements() { 
 	switch(gameState) { 
 
@@ -124,6 +129,8 @@ function setGameElements() {
 	}
 }
 
+/* Bring the standard view of site, before interaction with User, in case, when User use
+exit button */
 function reset() {
 	gameState = 'notStarted';
 	newGameBtnExtended.innerText = 'Extended';
@@ -135,6 +142,7 @@ function reset() {
 	setGameElements();
 }
 
+/* Sets up elements for new game */
 function newGame() { 
 	player.name = prompt('What is your name?', 'Name');
 
@@ -149,16 +157,28 @@ function newGame() {
 	} 
 }
 
+/* Set up UI for extended version of game */
 function newGameExt() {
 	version = 'extended';
 	newGame();
 }
 
+/* Set up UI for basic version of game */
 function newGameBsc() {
 	version = 'basic';
 	newGame();
 }
 
+/* Set up UI for view of description of game rules */
+function displayRules() {
+	version = 'extended';
+	gameState = 'rules';
+	setGameElements();
+}
+
+/* GAME FLOW FAUNCTIONS - interaction with User, determining the result of every round */
+
+/* Determines results of given round, controls reaction for given result */
 function checkRoundWinner(playerPick, computerPick) {
 	playerResultElem.innerHTML = computerResultElem.innerHTML = '';
 	var result = playerPick.compare(computerPick);
@@ -176,42 +196,13 @@ function checkRoundWinner(playerPick, computerPick) {
 	isOver();
 }
 
-function draw() {
-	commentator.style.color = '#ffa500';
-	computerResultElem.innerHTML = 'Draw!';
-	playerResultElem.innerHTML = 'Draw!';
-	computerResultElem.style.color = '#ffa500';
-	playerResultElem.style.color = '#ffa500';
-}
-
-function playerWins() {
-	playerResultElem.innerHTML = 'Victory!';
-	computerResultElem.innerHTML = 'Defeat!';
-	computerResultElem.style.color = '#ff0000';
-	playerResultElem.style.color = '#00ff00';
-	player.score++;
-	commentator.style.color = '#00FF00';
-}
-
-function computerWins() {
-	computerResultElem.innerHTML = 'Victory!';
-	playerResultElem.innerHTML = 'Defeat!';
-	computerResultElem.style.color = '#00ff00';
-	playerResultElem.style.color = '#ff0000';
-	computer.score++;
-	commentator.style.color = '#FF0000';
-}
-
-function setGamePoints() {
-	playerPointsElem.innerHTML = player.score;
-	computerPointsElem.innerHTML = computer.score;
-}
-
+/* Generate random CMP choice */
 function getComputerPick() {
 	var len = possibleChoice.length;
 	return(possibleChoice[Math.floor(Math.random()*len)]);
 }
 
+/* Controls User input action */
 function playerPick(playerPick) {
 	console.log(playerPick);
 	var computerPick = getComputerPick();
@@ -222,6 +213,7 @@ function playerPick(playerPick) {
 	checkRoundWinner(playerPick, computerPick);
 }
 
+/* Determines moment, in which game should end. */
 function isOver() {
 	if (player.score === 10 || computer.score === 10) {
 		if( player.score === 10) {
@@ -233,6 +225,44 @@ function isOver() {
 		setVersion();
 		setGameElements();
 	}
+}
+
+/* RESULTS VIEW FUNCTIONS - updating and displaying an information about game results, 
+responses for User actions */
+
+/* Set up view elements for draw result */
+function draw() {
+	commentator.style.color = '#ffa500';
+	computerResultElem.innerHTML = 'Draw!';
+	playerResultElem.innerHTML = 'Draw!';
+	computerResultElem.style.color = '#ffa500';
+	playerResultElem.style.color = '#ffa500';
+}
+
+/* Set up view elements for players wins result */
+function playerWins() {
+	playerResultElem.innerHTML = 'Victory!';
+	computerResultElem.innerHTML = 'Defeat!';
+	computerResultElem.style.color = '#ff0000';
+	playerResultElem.style.color = '#00ff00';
+	player.score++;
+	commentator.style.color = '#00FF00';
+}
+
+/* Set up view elements for CMP wins result */
+function computerWins() {
+	computerResultElem.innerHTML = 'Victory!';
+	playerResultElem.innerHTML = 'Defeat!';
+	computerResultElem.style.color = '#00ff00';
+	playerResultElem.style.color = '#ff0000';
+	computer.score++;
+	commentator.style.color = '#FF0000';
+}
+
+/* Update game score view */
+function setGamePoints() {
+	playerPointsElem.innerHTML = player.score;
+	computerPointsElem.innerHTML = computer.score;
 }
 
 /* It finds descrition for result of given round, for example, in case of: 
@@ -254,6 +284,7 @@ function getDescription(first, second) {
 	commentator.innerText = result;
 }
 
+/* Visualize game rules by highlighting proper elements of UI */
 function markRelated(figure) {
 	if (gameState == 'rules') {
 		for(var i = 0; i < figure.weakness.length; i++) {
@@ -266,6 +297,7 @@ function markRelated(figure) {
 	
 }
 
+/* Visualize game rules, by hiding highlight of UI elements */
 function unmarkRelated(figure) {
 	if (gameState == 'rules') {
 		for(var i = 0; i < figure.weakness.length; i++) {
@@ -275,24 +307,21 @@ function unmarkRelated(figure) {
 	}
 }
 
-function displayRules() {
-	version = 'extended';
-	gameState = 'rules';
-	setGameElements();
+
+/* TODO: function which doesn't work, but I don't know why. 
+function setRelations() {
+	for(key in map) {
+		console.log(map[key]);
+		console.log(window[key]);
+		map[key].addEventListener('click', function() { playerPick(window[key]);});
+		map[key].addEventListener('mouseover', function() { markRelated(window[key]);});
+		map[key].addEventListener('mouseout', function() { unmarkRelated(window[key]);});
+	}
 }
-
-// function setRelations() {
-// 	for(key in map) {
-// 		console.log(map[key]);
-// 		console.log(window[key]);
-// 		map[key].addEventListener('click', function() { playerPick(window[key]);});
-// 		map[key].addEventListener('mouseover', function() { markRelated(window[key]);});
-// 		map[key].addEventListener('mouseout', function() { unmarkRelated(window[key]);});
-// 	}
-// }
+*/
 
 
-
+/* EVENT LISTENERS */
 pickRock.addEventListener('click', function() { playerPick(rock); });
 pickRock.addEventListener('mouseover', function() { markRelated(rock); });
 pickRock.addEventListener('mouseout', function() { unmarkRelated(rock); });
@@ -317,4 +346,6 @@ newGameBtnBasic.addEventListener('click', newGameBsc);
 newGameBtnExtended.addEventListener('click', newGameExt);
 rulesBtn.addEventListener('click', displayRules);
 exitBtn.addEventListener('click', reset);
+
+/* First setting of game elements */
 setGameElements();
