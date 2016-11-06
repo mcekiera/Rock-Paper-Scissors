@@ -308,39 +308,23 @@ function unmarkRelated(figure) {
 }
 
 
-/* TODO: function which doesn't work, but I don't know why. 
+/* EVENT LISTENERS */ 
 function setRelations() {
-	for(key in map) {
-		console.log(map[key]);
-		console.log(window[key]);
+
+	var setListener = function(key) {
 		map[key].addEventListener('click', function() { playerPick(window[key]);});
 		map[key].addEventListener('mouseover', function() { markRelated(window[key]);});
 		map[key].addEventListener('mouseout', function() { unmarkRelated(window[key]);});
 	}
+
+	for(key in map) {
+		console.log(key + ',' + map[key]);
+		if(map.hasOwnProperty(key)) {
+
+			setListener(key);
+		}
+	}
 }
-*/
-
-
-/* EVENT LISTENERS */
-pickRock.addEventListener('click', function() { playerPick(rock); });
-pickRock.addEventListener('mouseover', function() { markRelated(rock); });
-pickRock.addEventListener('mouseout', function() { unmarkRelated(rock); });
-
-pickPaper.addEventListener('click', function() { playerPick(paper); });
-pickPaper.addEventListener('mouseover', function() { markRelated(paper); });
-pickPaper.addEventListener('mouseout', function() { unmarkRelated(paper); });
-
-pickScissors.addEventListener('click', function() { playerPick(scissors); });
-pickScissors.addEventListener('mouseover', function() { markRelated(scissors); });
-pickScissors.addEventListener('mouseout', function() { unmarkRelated(scissors); });
-
-pickSpock.addEventListener('click', function() { playerPick(spock); });
-pickSpock.addEventListener('mouseover', function() { markRelated(spock); });
-pickSpock.addEventListener('mouseout', function() { unmarkRelated(spock); });
-
-pickLizard.addEventListener('click', function() { playerPick(lizard); });
-pickLizard.addEventListener('mouseover', function() { markRelated(lizard); });
-pickLizard.addEventListener('mouseout', function() { unmarkRelated(lizard); });
 
 newGameBtnBasic.addEventListener('click', newGameBsc);
 newGameBtnExtended.addEventListener('click', newGameExt);
@@ -348,4 +332,6 @@ rulesBtn.addEventListener('click', displayRules);
 exitBtn.addEventListener('click', reset);
 
 /* First setting of game elements */
+setRelations();
 setGameElements();
+
