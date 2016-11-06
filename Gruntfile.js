@@ -20,6 +20,9 @@ module.exports = function(grunt) {
 				}, 
 			} 
 		},
+		eslint: {
+        target: ['file.js']
+    },
 		browserSync: {
 			default_options: {
 				bsFiles: {

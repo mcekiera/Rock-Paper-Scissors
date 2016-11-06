@@ -119,7 +119,7 @@ function setGameElements() {
 				newGameBtnExtended.innerText = 'Try again!';
 				newGameBtnBasic.innerText = 'Basic';
 			}
-
+			
 		case 'notStarted': 
 
 		default: 
