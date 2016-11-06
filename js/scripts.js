@@ -171,8 +171,10 @@ function newGameBsc() {
 
 /* Set up UI for view of description of game rules */
 function displayRules() {
+	reset();
 	version = 'extended';
 	gameState = 'rules';
+	setVersion();
 	setGameElements();
 }
 
@@ -180,20 +182,22 @@ function displayRules() {
 
 /* Determines results of given round, controls reaction for given result */
 function checkRoundWinner(playerPick, computerPick) {
-	playerResultElem.innerHTML = computerResultElem.innerHTML = '';
-	var result = playerPick.compare(computerPick);
+	if(gameState != 'rules') {
+		playerResultElem.innerHTML = computerResultElem.innerHTML = '';
+		var result = playerPick.compare(computerPick);
 
-	if (result === 0) {
-		draw();
-	} else if ( result === -1) { 
-		computerWins();
-	} else {
-		playerWins();
+		if (result === 0) {
+			draw();
+		} else if ( result === -1) { 
+			computerWins();
+		} else {
+			playerWins();
+		}
+
+		getDescription(playerPick.toString(),computerPick);
+		setGamePoints(); 
+		isOver();
 	}
-
-	getDescription(playerPick.toString(),computerPick);
-	setGamePoints(); 
-	isOver();
 }
 
 /* Generate random CMP choice */
